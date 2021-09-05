@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Location</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        
+        *{
+            font-family: poppins;
+            margin: 0;
+            padding: 0;
+            color: rgb(197, 183, 221);
+        }
+
+        main{
+            background: rgb(51, 14, 107);
+            width: 100%;
+            text-align: center;
+        }
+
+        body{
+            background: rgb(4, 0, 10);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .content{
+            padding: 10px;
+        }
+
+        .title{
+            background: chocolate;
+            color:#000;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px 0;
+        }
+
+        .geo{
+            margin: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        span{
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="title">Geo Location > Longitude & Latitude</div>
+
+        <div class="content">
+            <div class="geo">Longitude > <span class="long"></span></div>
+            <div class="geo">Latitude > <span class=" lat"></span></div>
+        </div>
+    </main>
+
+    <script>
+
+        const long = document.querySelector('.long');
+        const lat = document.querySelector('.lat');
+        const content = document.querySelector('.content');
+
+        geo = () => {
+            if(navigator.geolocation){
+
+                navigator.geolocation.getCurrentPosition( (position) => {
+
+                    long.innerHTML = parseFloat(position.coords.longitude).toFixed(5);
+                    lat.innerHTML = parseFloat(position.coords.latitude).toFixed(5);
+
+                } );
+
+            } else{
+
+                content.innerHTML = "Geolocation is not supported by this browser.";
+           
+            }
+        }
+
+        // geo();
+        
+        setInterval(geo(), 100);
+
+    </script>
+</body>
+</html>
